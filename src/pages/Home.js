@@ -11,6 +11,7 @@ export default function Home() {
             <p> For: TruckDriverRegistration use path = /TruckDriverRegistration   </p>
             <p> For: TruckRegistration use path = /TruckRegistration   </p>
             <p> For: CraneOperator use path = /CraneOperator  </p>
+            <p> For: ContainerRegistration use path = /ContainerRegistration </p>
         </>
     )
 }

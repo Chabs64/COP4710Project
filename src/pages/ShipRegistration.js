@@ -3,29 +3,31 @@ export default function ShipRegistration() {
         <>
             <>
               <h2>Ship Registration</h2>
-              <form action="“RegisterShip.jsp”" method="“GET”" name="“ShipRegistration”">
-                <label htmlFor="ShipID">Ship Registration:</label>
+              <form action="RegisterShipAPI.js" method="GET" name="ShipRegistration">
+                <label htmlFor="ShipID">Ship ID:</label>
                 <br />
                 <input
                   type="text"
                   id="shipID"
                   name="Ship ID"
-                  defaultValue="Enter Ship ID"
+                  defaultValue="Enter Ship ID Here"
                 />
                 <br />
-                <label htmlFor="ShipName">Berth Dock:</label>
+                <br />
+                <label htmlFor="ShipName">Ship Name:</label>
                 <br />
                 <input
                   type="text"
-                  id="ShipName"
+                  id="shipName"
                   name="Ship Name"
-                  defaultValue="Enter Ship Name"
+                  defaultValue="Enter Ship Name Here"
                 />
                 <br />
                 <input type="submit" defaultValue="Submit" />
               </form>
+              <br />
               <p>
-                Enter the ship id and name of the ship, if it already exists it will display
+                Enter the Ship ID and the Ship Name of the ship, if it already exists it will display
                 an error
               </p>
             </>

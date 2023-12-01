@@ -8,6 +8,7 @@ import ShipRegistration from './pages/ShipRegistration';
 import TruckDriverRegistration from './pages/TruckDriverRegistration';
 import TruckRegistration from './pages/TruckRegistration';
 import CraneOperator from './pages/CraneOperator';
+import ContainerRegistration from './pages/ContainerRegistration';
 
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
                 <Route path = '/TruckDriverRegistration' element = {<TruckDriverRegistration / >} />
                 <Route path = '/TruckRegistration' element = {<TruckRegistration / >} />
                 <Route path = '/CraneOperator' element = {<CraneOperator / >} />
+                <Route path = '/ContainerRegistration' element = {<ContainerRegistration / >} />
             </Routes>
         </BrowserRouter>
         </header>

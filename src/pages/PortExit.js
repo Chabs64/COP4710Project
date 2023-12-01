@@ -2,7 +2,7 @@ export default function PortExit() {
     return(
         <>
           <h2>Port Exit</h2>
-          <form action="“PortExitDO.jsp”" method="“GET”" name="“PortExit”">
+          <form action="PortExitAPI.js" method="GET" name="PortExit">
             <label htmlFor="ShipID">Ship Leaving Port:</label>
             <br />
             <input
@@ -14,6 +14,7 @@ export default function PortExit() {
             <br />
             <input type="submit" defaultValue="Submit" />
           </form>
+          <br />
           <p>
             If the ship corresponding to the Ship ID provided is in a berth it will be
             ejected.

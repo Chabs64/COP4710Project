@@ -3,15 +3,16 @@ export default function PortEntry() {
         <>
             <>
               <h2>Port Entry</h2>
-              <form action="“PortEntryAPI.js”" method="“GET”" name="“PortEntry”">
+              <form action="PortEntryAPI.js" method="GET" name="PortEntry">
                 <label htmlFor="ShipID">Ship Entering Port:</label>
                 <br />
                 <input
                   type="text"
                   id="shipID"
                   name="Ship ID"
-                  defaultValue="Enter Ship ID"
+                  defaultValue="Enter Ship ID Here"
                 />
+                <br />
                 <br />
                 <input type="submit" defaultValue="Submit" />
                 <div />
@@ -22,7 +23,8 @@ export default function PortEntry() {
                 <input type="text" id="berthID" name="Berth ID" defaultValue="" />
                 <br />
               </form>
-              <p>Entry a shipID and other information and receive a berth to dock at.</p>
+              <br />
+              <p>Entry a Ship ID and receive a berth to dock at.</p>
             </>
         </>
     )

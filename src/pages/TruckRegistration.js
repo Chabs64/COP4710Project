@@ -3,7 +3,7 @@ export default function TruckRegistration() {
         <>
             <>
               <h2>Truck Registration</h2>
-              <form action="RegisterTruck.jsp" method="GET" name="TruckRegistration">
+              <form action="RegisterTruckAPI.js" method="GET" name="TruckRegistration">
                 <label htmlFor="TruckID">Truck Registration:</label>
                 <br />
                 <input

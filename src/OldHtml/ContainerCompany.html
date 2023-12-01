@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Container Company Registration</h1>
+  
+  <form id="containerRegistrationForm">
+    <label for="containerID">Container ID:</label>
+    <input type="text" id="containerID" name="containerID"><br><br>
+    
+    <label for="sourceID">Source (Ship/Truck ID):</label>
+    <input type="text" id="sourceID" name="sourceID"><br><br>
+    
+    <label for="destinationID">Destination (Ship/Truck ID):</label>
+    <input type="text" id="destinationID" name="destinationID"><br><br>
+    
+    <label for="storageArea">Storage Area:</label>
+    <input type="text" id="storageArea" name="storageArea"><br><br>
+    
+    <button type="button" onclick="registerContainer()">Register Container</button>
+  </form>
+
+  <script>
+    function registerContainer() {
+      // Retrieve input values
+      const containerID = document.getElementById('containerID').value;
+      const sourceID = document.getElementById('sourceID').value;
+      const destinationID = document.getElementById('destinationID').value;
+      const storageArea = document.getElementById('storageArea').value;
+
+      console.log("Container ID:", containerID);
+      console.log("Source ID:", sourceID);
+      console.log("Destination ID:", destinationID);
+      console.log("Storage Area:", storageArea);
+
+      document.getElementById('containerRegistrationForm').reset();
+    }
+  </script>
+</body>
+</html>

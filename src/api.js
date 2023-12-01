@@ -37,7 +37,7 @@ app.post('/insertuser', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Username and email are required.' });
     }
 
-    const query = 'INSERT INTO users (username, email) VALUES ($1, $2)';
+    const query = 'INSERT INTO  (username, email) VALUES ($1, $2)';
     const values = [username, email];
 
     const result = await pool.query(query, values);
