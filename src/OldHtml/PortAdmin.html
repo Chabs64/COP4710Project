@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Port Admin Management</h1>
+  
+  <h2>Ship Details</h2>
+  <form id="shipDetailsForm">
+    <label for="shipID">Enter Ship ID:</label>
+    <input type="text" id="shipID" name="shipID" placeholder="Enter Ship ID">
+    <button type="button" onclick="viewShipDetails()">View Ship Details</button>
+  </form>
+
+  <h2>Berth Overview</h2>
+  <div id="berthOverview">
+    <!-- Berth overview will be displayed here -->
+  </div>
+
+  <h2>Container Insights</h2>
+  <form id="containerInsightsForm">
+    <label for="containerID">Enter Container ID:</label>
+    <input type="text" id="containerID" name="containerID" placeholder="Enter Container ID">
+    <button type="button" onclick="viewContainerDetails()">View Container Insights</button>
+  </form>
+
+  <h2>Truck Information</h2>
+  <form id="truckInformationForm">
+    <label for="truckID">Enter Truck ID:</label>
+    <input type="text" id="truckID" name="truckID" placeholder="Enter Truck ID">
+    <button type="button" onclick="viewTruckDetails()">View Truck Information</button>
+  </form>
+
+  <script>
+    function viewShipDetails() {
+      // Logic to retrieve and display ship details using ship ID
+      const shipID = document.getElementById('shipID').value;
+      // Implement logic to fetch ship details based on shipID
+      console.log(`Fetching ship details for Ship ID: ${shipID}`);
+    }
+
+    // This could involve an AJAX request to fetch and display berth information
+    console.log("Displaying Berth Overview...");
+    // Example: Displaying hardcoded berth information
+    document.getElementById('berthOverview').innerHTML = "<p>Berth 1: Ship ID - 1</p><p>Berth 2: Ship ID - 2</p>";
+
+    function viewContainerDetails() {
+      // Logic to retrieve and display container details using container ID
+      const containerID = document.getElementById('containerID').value;
+      // Implement logic to fetch container details based on containerID
+      console.log(`Fetching container details for Container ID: ${containerID}`);
+    }
+
+    function viewTruckDetails() {
+      // Logic to retrieve and display truck details using truck ID
+      const truckID = document.getElementById('truckID').value;
+      // Implement logic to fetch truck details based on truckID
+      console.log(`Fetching truck details for Truck ID: ${truckID}`);
+    }
+  </script>
+</body>
+</html>

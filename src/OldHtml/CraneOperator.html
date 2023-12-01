@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Crane Operator</h1>
+
+<form id="inputForm">
+    <label for="idInput">Enter Ship or Truck ID:</label>
+    <input type="text" id="idInput" name="idInput">
+    <button type="button" onclick="viewContainerDetails()">Submit</button>
+</form>
+
+<div id="containerDetails" style="display: none;">
+    <!-- Container details will be displayed here -->
+</div>
+
+<script>
+    function viewContainerDetails() {
+        // Retrieve the entered ID
+        const enteredID = parseInt(document.getElementById('idInput').value);
+
+        const containerDetails = [
+            { id: 1, details: 'Container 1 - Location: A1', status: 'Loaded', transportMode: 'Ship' },
+            { id: 2, details: 'Container 2 - Location: B3', status: 'Unloaded', transportMode: 'Truck' },
+            { id: 3, details: 'Container 3 - Location: C5', status: 'Loaded', transportMode: 'Ship' },
+            { id: 4, details: 'Container 4 - Location: D7', status: 'Unloaded', transportMode: 'Truck' },
+            { id: 5, details: 'Container 5 - Location: E9', status: 'Loaded', transportMode: 'Ship' },
+            // Add more container details including status, location, contents, and transport mode
+        ];
+
+        // Filter container based on the entered ID
+        const selectedContainer = containerDetails.find(container => container.id === enteredID);
+
+        // Display container details
+        const containerDetailsDiv = document.getElementById('containerDetails');
+        containerDetailsDiv.innerHTML = '<h2>Container Details:</h2>';
+        if (selectedContainer) {
+            containerDetailsDiv.innerHTML += `<p>${selectedContainer.details} - Status: ${selectedContainer.status} - Transport Mode: ${selectedContainer.transportMode}</p>`;
+        } else {
+            containerDetailsDiv.innerHTML += `<p>No container found for ID ${enteredID}</p>`;
+        }
+
+        // Show the container details section
+        containerDetailsDiv.style.display = 'block';
+
+        // Update container status (you'd implement this logic)
+        updateContainerStatus();
+    }
+
+    function updateContainerStatus() {
+        // Logic to update container status in the system goes here
+        // This could involve making backend requests to update the status
+    }
+</script>
+</body>
+</html>

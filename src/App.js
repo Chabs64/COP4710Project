@@ -1,25 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import PortEntry from './pages/PortEntry';
+import PortExit from './pages/PortExit';
+import PortAdmin from './pages/PortAdmin';
+import ShipRegistration from './pages/ShipRegistration';
+import TruckDriverRegistration from './pages/TruckDriverRegistration';
+import TruckRegistration from './pages/TruckRegistration';
+import CraneOperator from './pages/CraneOperator';
 
-function App() {
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className = "App">
+        <header className = "App-header">
+        <BrowserRouter>
+            <Routes>
+                <Route index element = {<Home / >} />
+                <Route path = '/PortEntry' element = {<PortEntry / >} />
+                <Route path = '/PortExit' element = {<PortExit / >} />
+                <Route path = '/PortAdmin' element = {<PortAdmin / >} />
+                <Route path = '/ShipRegistration' element = {<ShipRegistration / >} />
+                <Route path = '/TruckDriverRegistration' element = {<TruckDriverRegistration / >} />
+                <Route path = '/TruckRegistration' element = {<TruckRegistration / >} />
+                <Route path = '/CraneOperator' element = {<CraneOperator / >} />
+            </Routes>
+        </BrowserRouter>
+        </header>
     </div>
-  );
+  )
 }
-
-export default App;
