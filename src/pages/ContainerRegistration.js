@@ -2,7 +2,7 @@ export default function ContainerRegistration() {
     return(
         <>
           <h1>Container Registration</h1>
-          <form id="containerRegistrationForm">
+          <form id="containerRegistrationForm" method="GET" name="ContainerRegistration">
             <label htmlFor="containerID">Container ID:</label>
             <input type="text" id="containerID" name="containerID" />
             <br />
@@ -19,9 +19,7 @@ export default function ContainerRegistration() {
             <input type="text" id="storageArea" name="storageArea" />
             <br />
             <br />
-            <button type="button" onclick="registerContainer()">
-              Register Container
-            </button>
+            <input type="submit" defaultValue="Submit" />
           </form>
         </>
     )
