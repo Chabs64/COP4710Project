@@ -13,7 +13,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'ports',
-  password: 'portz',
+  password: 'testing',
   port: 5432, // Change if your PostgreSQL server runs on a different port
 });
 console.log("CONNECTED PG");
@@ -41,6 +41,22 @@ app.post('/api/insertship', async (req, res) => {
 
     const query = 'INSERT INTO Ships(Shipname, ShipID) VALUES ($1, $2)';
     const values = [Shipname, ShipID];
+
+    const result = await pool.query(query, values);
+    res.status(201).json({ success: true, data: result.rows[0] });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+app.post('/api/removeship', async (req, res) => {
+  try {
+    console.log("calledportexit");
+    const {ShipID} = req.body;
+
+
+    const query = 'UPDATE Berths set ShipID = 0 where ShipID = $1';
+    const values = [ShipID];
 
     const result = await pool.query(query, values);
     res.status(201).json({ success: true, data: result.rows[0] });
