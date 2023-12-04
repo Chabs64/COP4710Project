@@ -1,21 +1,27 @@
+import React, { useState } from 'react';
+
 export default function ContainerRegistration() {
-  const [shipID, setShipID] = useState('');
-  const [shipName, setShipName] = useState('');
-  const [shipName, setShipName] = useState('');
-  const [shipName, setShipName] = useState('');
+  const [containerID, setcontainerID] = useState('');
+  const [sourceID, setsourceID] = useState('');
+  const [destinationID, setdestinationID] = useState('');
+  const [storageArea, setstorageArea] = useState('');
+  const [stats, setstats] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:4000/api/insertship', {
+      const response = await fetch('http://localhost:4000/api/addcontainer', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          Shipname: shipName,
-          ShipID: shipID,
+          ContainerID: containerID,
+          SourceID: sourceID,
+          DestinationID: destinationID,
+          StorageArea: storageArea,
+          Stats: stats
         }),
       });
 
@@ -37,31 +43,36 @@ export default function ContainerRegistration() {
           <form onSubmit={handleSubmit}>
             <label htmlFor="containerID">Container ID:</label>
             <input type="text" id="containerID" name="containerID" value={containerID}
-                                                                             onChange={(e) => setShipName(e.target.value)}
-                                                                             placeholder="Enter Ship Name Here"/>
+                                                                             onChange={(e) => setcontainerID(e.target.value)}
+                                                                             placeholder="Enter Container ID Here"/>
             <br />
             <br />
             <label htmlFor="sourceID">Source (Ship/Truck ID):</label>
             <input type="text" id="sourceID" name="sourceID" value={sourceID}
-                                                                       onChange={(e) => setShipName(e.target.value)}
-                                                                       placeholder="Enter Ship Name Here"/>
+                                                                       onChange={(e) => setsourceID(e.target.value)}
+                                                                       placeholder="Enter Source ID Here"/>
             <br />
             <br />
             <label htmlFor="destinationID">Destination (Ship/Truck ID):</label>
-            <input type="text" id="destinationID" name="destinationID" value={shipName}
-                                                                                 onChange={(e) => setShipName(e.target.value)}
-                                                                                 placeholder="Enter Ship Name Here"/>
+            <input type="text" id="destinationID" name="destinationID" value={destinationID}
+                                                                                 onChange={(e) => setdestinationID(e.target.value)}
+                                                                                 placeholder="Enter Destination ID Here"/>
             <br />
             <br />
             <label htmlFor="storageArea">Storage Area:</label>
-            <input type="text" id="storageArea" name="storageArea" value={shipName}
-                                                                             onChange={(e) => setShipName(e.target.value)}
-                                                                             placeholder="Enter Ship Name Here"/>
+            <input type="text" id="storageArea" name="storageArea" value={storageArea}
+                                                                             onChange={(e) => setstorageArea(e.target.value)}
+                                                                             placeholder="Enter Storage Location Here"/>
             <br />
             <br />
-            <input type="submit" defaultValue="Submit" value={shipName}
-                                                                 onChange={(e) => setShipName(e.target.value)}
-                                                                 placeholder="Enter Ship Name Here"/>
+                        <label htmlFor="stats">Stats:</label>
+                        <input type="text" id="stats" name="stats" value={stats}
+                                                                                         onChange={(e) => setstats(e.target.value)}
+                                                                                         placeholder="Enter Stats Here"/>
+            <br />
+            <br />
+            <input type="submit" defaultValue="Submit" />
+
           </form>
         </>
     )

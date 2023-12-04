@@ -14,7 +14,7 @@ export default function ShipRegistration() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          Shipname: shipName,
+          ShipName: shipName,
           ShipID: shipID,
         }),
       });

@@ -36,7 +36,7 @@ export default function PortEntry() {
                       'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                      ShipID: shipID
+                      ShipID: shipID,
                       BerthID: berthID
                     }),
                   });

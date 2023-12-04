@@ -36,11 +36,11 @@ app.get('/api/example', (req, res) => {
 app.post('/api/insertship', async (req, res) => {
   try {
     console.log(req.body)
-    const { Shipname, ShipID} = req.body;
+    const { ShipName, ShipID} = req.body;
 
 
-    const query = 'INSERT INTO Ships(Shipname, ShipID) VALUES ($1, $2)';
-    const values = [Shipname, ShipID];
+    const query = 'INSERT INTO Ships(ShipName, ShipID) VALUES ($1, $2)';
+    const values = [ShipName, ShipID];
 
     const result = await pool.query(query, values);
     res.status(201).json({ success: true, data: result.rows[0] });
@@ -89,6 +89,26 @@ app.post('/api/removeship', async (req, res) => {
 
     const query = 'UPDATE Berths set ShipID = 0 where ShipID = $1';
     const values = [ShipID];
+
+    const result = await pool.query(query, values);
+    res.status(201).json({ success: true, data: result.rows[0] });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+app.post('/api/addcontainer', async (req, res) => {
+  try {
+    console.log(req.body)
+    const {ContainerID: containerID} = req.body;
+    const {SourceID: sourceID} = req.body;
+    const {DestinationID: destinationID} = req.body;
+    const {StorageArea: storageArea} = req.body;
+    const {Stats: stats} = req.body;
+
+
+    const query = 'INSERT INTO Container (ContainerID, SourceID, DestinationID, LocationID ,Stats) VALUES ($1, $2, $3, $4, $5)';
+    const values = [ContainerID, SourceID, DestinationID, StorageArea, Stats];
 
     const result = await pool.query(query, values);
     res.status(201).json({ success: true, data: result.rows[0] });
