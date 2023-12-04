@@ -1,15 +1,19 @@
 const express = require('express');
 const { Pool } = require('pg');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 app.use(express.json());
+app.use(cors());
+
+
 // Set up PostgreSQL connection pool
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'ports',
-  password: 'testing',
+  password: 'portz',
   port: 5432, // Change if your PostgreSQL server runs on a different port
 });
 console.log("CONNECTED PG");
@@ -29,18 +33,14 @@ app.get('/api/example', (req, res) => {
   res.send('This is an example string from the API!');
 });
 
-app.post('/api/insertuser', async (req, res) => {
+app.post('/api/insertship', async (req, res) => {
   try {
     console.log(req.body)
-    const { username, email } = req.body;
+    const { Shipname, ShipID} = req.body;
 
-    // Ensure both username and email are provided in the request
-    if (!username || !email) {
-      return res.status(400).json({ success: false, message: 'Username and email are required.' });
-    }
 
-    const query = 'INSERT INTO  (username, email) VALUES ($1, $2)';
-    const values = [username, email];
+    const query = 'INSERT INTO Ships(Shipname, ShipID) VALUES ($1, $2)';
+    const values = [Shipname, ShipID];
 
     const result = await pool.query(query, values);
     res.status(201).json({ success: true, data: result.rows[0] });
