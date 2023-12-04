@@ -100,12 +100,7 @@ app.post('/api/removeship', async (req, res) => {
 app.post('/api/addcontainer', async (req, res) => {
   try {
     console.log(req.body)
-    const {ContainerID: containerID} = req.body;
-    const {SourceID: sourceID} = req.body;
-    const {DestinationID: destinationID} = req.body;
-    const {StorageArea: storageArea} = req.body;
-    const {Stats: stats} = req.body;
-
+    const {ContainerID, SourceID, DestinationID, StorageArea, Stats} = req.body;
 
     const query = 'INSERT INTO Container (ContainerID, SourceID, DestinationID, LocationID ,Stats) VALUES ($1, $2, $3, $4, $5)';
     const values = [ContainerID, SourceID, DestinationID, StorageArea, Stats];
