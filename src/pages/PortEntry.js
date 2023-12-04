@@ -1,16 +1,72 @@
+import React, { useState } from 'react';
+
 export default function PortEntry() {
+
+    const [shipID, setShipID] = useState('');
+    const [berthID, setBerthNumber] = useState('');
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+          const response = await fetch('http://localhost:4000/api/enterport', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              ShipID: shipID
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error('Error registering ship');
+          }
+
+          // Handle success if needed
+        } catch (error) {
+          // Handle error
+          console.error('Error:', error.message);
+        }
+
+        try {
+                  const response = await fetch('http://localhost:4000/api/getberth', {
+                    method: 'GET',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      ShipID: shipID
+                      BerthID: berthID
+                    }),
+                  });
+
+                  if (!response.ok) {
+                    throw new Error('No Berth Available');
+                  }
+
+                  // Handle success if needed
+                } catch (error) {
+                  // Handle error
+                  console.error('Error:', error.message);
+                }
+      };
+
+
     return(
         <>
             <>
               <h2>Port Entry</h2>
-              <form action="PortEntryAPI.js" method="GET" name="PortEntry">
+              <form onSubmit={handleSubmit}>
                 <label htmlFor="ShipID">Ship Entering Port:</label>
                 <br />
                 <input
                   type="text"
                   id="shipID"
                   name="Ship ID"
-                  defaultValue="Enter Ship ID Here"
+                  value={shipID}
+                  onChange={(e) => setShipID(e.target.value)}
+                  placeholder="Enter Ship ID Here"
                 />
                 <br />
                 <br />
@@ -18,9 +74,11 @@ export default function PortEntry() {
                 <div />
                 <p />
                 <div />
-                <label htmlFor="berthID">Berth Dock:</label>
+                <label htmlFor="BerthID">Berth Dock:</label>
                 <br />
-                <input type="text" id="berthID" name="Berth ID" defaultValue="" />
+                <input type="text" id="berthID" name="Berth ID" value={berthID}
+                 onChange={(e) => setBerthNumber(e.target.value)}
+                 placeholder="" />
                 <br />
               </form>
               <br />
