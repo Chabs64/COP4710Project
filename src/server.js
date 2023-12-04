@@ -81,6 +81,22 @@ app.get('/api/getberth', async (req, res) => {
   }
 });
 
+app.post('/api/removeship', async (req, res) => {
+  try {
+    console.log("calledportexit");
+    const {ShipID} = req.body;
+
+
+    const query = 'UPDATE Berths set ShipID = 0 where ShipID = $1';
+    const values = [ShipID];
+
+    const result = await pool.query(query, values);
+    res.status(201).json({ success: true, data: result.rows[0] });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
