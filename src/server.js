@@ -13,7 +13,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'ports',
-  password: 'testing',
+  password: 'portz',
   port: 5432, // Change if your PostgreSQL server runs on a different port
 });
 console.log("CONNECTED PG");
@@ -60,15 +60,14 @@ app.post('/api/enterport', async (req, res) => {
 
     const result = await pool.query(query, values);
     res.status(201).json({ success: true, data: result.rows[0] });
-  } catch (error) {
+  } 
+  catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
 });
 
 app.post('/api/getberth', async (req, res) => {
   try {
-    console.log(req.body)
-    console.log("hello????")
     const {ShipID} = req.body;
 
 
@@ -76,7 +75,16 @@ app.post('/api/getberth', async (req, res) => {
     const values = [ShipID];
 
     const result = await pool.query(query, values);
-    res.status(201).json({ success: true, data: result.rows[0].berthid});
+
+
+    console.log(result.rows[0]);
+    if (typeof result.rows[0] == 'undefined'){
+      console.log('here');
+      res.status(201).json({ success: true, data: "berths full"});
+    }
+    else{
+      res.status(201).json({ success: true, data: result.rows[0].berthid});
+    }
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }

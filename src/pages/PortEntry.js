@@ -44,7 +44,6 @@ export default function PortEntry() {
         setReceivedBerth(receivedBerth);
     } catch (error) {
       console.error('Error:', error.message);
-      console.log("WHYYYYY");
     }
   };
 
