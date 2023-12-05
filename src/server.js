@@ -12,8 +12,8 @@ app.use(cors());
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'PortCOP4710',
-  password: 'chabs764',
+  database: 'ports',
+  password: 'testing',
   port: 5432, // Change if your PostgreSQL server runs on a different port
 });
 console.log("CONNECTED PG");
@@ -68,14 +68,14 @@ app.post('/api/enterport', async (req, res) => {
 app.get('/api/getberth', async (req, res) => {
   try {
     console.log(req.body)
-    const {shipID} = req.body;
+    const {ShipID} = req.body;
 
 
     const query = 'SELECT berthID FROM berths WHERE shipID = ($1)';
     const values = [ShipID];
 
     const result = await pool.query(query, values);
-    res.status(201).json({ success: true, data: result.rows[0] });
+    res.status(201).json({ success: true, data: result.rows[0].berthid});
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
