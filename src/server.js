@@ -65,9 +65,10 @@ app.post('/api/enterport', async (req, res) => {
   }
 });
 
-app.get('/api/getberth', async (req, res) => {
+app.post('/api/getberth', async (req, res) => {
   try {
     console.log(req.body)
+    console.log("hello????")
     const {ShipID} = req.body;
 
 
