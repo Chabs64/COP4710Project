@@ -128,6 +128,50 @@ app.post('/api/addtruck', async (req, res) => {
   }
 });
 
+
+
+
+
+
+
+
+//needs to be done
+
+//show error for same truck id registration
+//show error for same ship id registration
+
+//show the first container storage area id that is ready for pick up base on the truck id, and show the first container storage area id that is ready to drop off
+app.get('/api/getTruckAndContanier', async (req, res) => {
+  try {
+
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+//show a list of containers matching the ID then display it, exclude all containers with status (column stats0 "at destination"
+app.get('/api/getContainersForID', async (req, res) => {
+  try {
+
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+//update the list of containers you got to the next step respectfully, "at source" to "in storage", and "in storage" to "at destination"
+app.post('/api/updateContainers', async (req, res) => {
+  try {
+
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+
+//port admin is still unfinished
+
+
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
