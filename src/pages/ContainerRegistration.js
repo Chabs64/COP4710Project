@@ -26,7 +26,7 @@ export default function ContainerRegistration() {
       });
 
       if (!response.ok) {
-        throw new Error('Error registering ship');
+        throw new Error('Error registering container');
       }
 
       // Handle success if needed
