@@ -112,6 +112,22 @@ app.post('/api/addcontainer', async (req, res) => {
   }
 });
 
+app.post('/api/addtruck', async (req, res) => {
+  try {
+    console.log(req.body)
+    const {trucksID} = req.body;
+
+
+    const query = 'INSERT INTO trucks(trucksid) VALUES ($1)';
+    const values = [trucksID];
+
+    const result = await pool.query(query, values);
+    res.status(201).json({ success: true, data: result.rows[0] });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

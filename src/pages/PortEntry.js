@@ -20,7 +20,7 @@ export default function PortEntry() {
           });
 
           if (!response.ok) {
-            throw new Error('Error registering ship');
+            throw new Error('Error getting available berth');
           }
 
           // Handle success if needed
