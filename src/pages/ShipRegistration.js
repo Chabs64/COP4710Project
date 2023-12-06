@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 export default function ShipRegistration() {
   const [shipID, setShipID] = useState('');
   const [shipName, setShipName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,12 +22,31 @@ export default function ShipRegistration() {
       });
 
       if (!response.ok) {
-        throw new Error('Error registering ship');
-      }
+        const errorText = await response.json();
+        if (errorText.error && errorText.error.includes('duplicate key value violates unique constraint')) {
+          setErrorMessage('Ship ID is already taken.');
+        } else {
+          throw new Error(errorText.error || 'Error registering ship');
+        }
+      } else {
+        // Reset error message if the registration succeeds
+        setErrorMessage('');
+        
+        // Reset shipID and shipName if needed
+        setShipID('');
+        setShipName('');
 
-      // Handle success if needed
+        // Show success message
+        setSuccessMessage('Registered!');
+        
+        // Hide success message after 3 seconds
+        setTimeout(() => {
+          setSuccessMessage('');
+        }, 3000);
+      }
     } catch (error) {
-      // Handle error
+      // Handle other errors and set error message
+      setErrorMessage(error.message);
       console.error('Error:', error.message);
     }
   };
@@ -59,11 +80,11 @@ export default function ShipRegistration() {
         <br />
         <input type="submit" value="Submit" />
       </form>
-      <br />
-      <p>
-        Enter the Ship ID and the Ship Name of the ship. If it already exists, an error will be displayed.
-      </p>
+      {/* Error message display */}
+      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+      {/* Success message display */}
+      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+      {/* Additional content */}
     </>
   );
 }
-
