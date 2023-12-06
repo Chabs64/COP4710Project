@@ -12,8 +12,8 @@ app.use(cors());
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'ports',
-  password: 'portz',
+  database: 'PortCOP4710',
+  password: 'chabs764',
   port: 5432, // Change if your PostgreSQL server runs on a different port
 });
 console.log("CONNECTED PG");
