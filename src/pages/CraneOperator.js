@@ -21,7 +21,7 @@ export default function CraneOperator() {
       });
 
       if (!response.ok) {
-        throw new Error('Error fetching containers');
+        throw new Error('No matching containers');
       }
 
       const data = await response.json();
@@ -34,7 +34,7 @@ export default function CraneOperator() {
       }
 
     } catch (error) {
-      setErrorMessage('Error fetching containers');
+      setErrorMessage('No matching containers');
       console.error('Error:', error.message);
     }
   };

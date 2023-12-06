@@ -184,9 +184,11 @@ app.post('/api/getContainersForID', async (req, res) => {
     const result = await pool.query(query, values);
 
 
-    //console.log(result.rows);
-    if (result.rows.length == 0){
-      res.status(201).json({ success: true, data: "ship or truck has no containers"});
+    console.log(result.rows);
+    if (typeof result.rows[0] == 'undefined'){
+      result = {containerid: 000, sourceid: 000, destinationid: 000, locationid: "None", stats: "Completed", values}
+      console.log(result.rows);
+      res.status(201).json({ success: true, data: result.rows});
     }
     else{
       res.status(201).json({ success: true, data: result.rows});
