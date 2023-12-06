@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 export default function TruckDriverRegistration() {
 
     const [TruckID, setTruckID] = useState('');
-    const [pickUP, setpickUP] = useState('');
-    const [dropOff, setdropOff] = useState('');
+    const [pickUP1, setpickUP] = useState('');
+    const [dropOff1, setdropOff] = useState('');
 
       const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-          const response = await fetch('http://localhost:4000/api/getTruckAndContanier', {
+          const responseSource = await fetch('http://localhost:4000/api/getTruckAndContainerSource', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -20,15 +20,47 @@ export default function TruckDriverRegistration() {
             }),
           });
 
-          if (!response.ok) {
+          console.log(responseSource);
+          if (!responseSource.ok) {
             throw new Error('Error getting truck info');
           }
+
+          const data = await responseSource.json();
+          const dropOff1 = data.data;
+
+
+          setdropOff(dropOff1);
+
+
+          const responseDestination = await fetch('http://localhost:4000/api/getTruckAndContainerDestination', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                truckID: TruckID,
+              }),
+            });
+
+
+        console.log(responseDestination);
+        if (!responseDestination.ok) {
+          throw new Error('Error getting truck info');
+        }
+
+        const data2 = await responseDestination.json();
+        const pickUP1 = data2.data;
+
+
+        setpickUP(pickUP1);
 
           // Handle success if needed
         } catch (error) {
           // Handle error
           console.error('Error:', error.message);
         }
+
+
       };
 
 
@@ -54,9 +86,8 @@ export default function TruckDriverRegistration() {
                   type="text"
                   id="dropOff"
                   name="dropOff"
-                  value={dropOff}
-                            onChange={(e) => setdropOff(e.target.value)}
-                            placeholder=""
+                  value={dropOff1}
+                  readOnly
                 />
                 <br />
                 <label htmlFor="pickUP">Pick Up:</label>
@@ -65,9 +96,8 @@ export default function TruckDriverRegistration() {
                   type="text"
                   id="pickUP"
                   name="pickUP"
-                  value={pickUP}
-                            onChange={(e) => setpickUP(e.target.value)}
-                            placeholder=""
+                  value={pickUP1}
+                  readOnly
                 />
                 <br />
                 <input type="submit" defaultValue="Submit" />

@@ -12,8 +12,8 @@ app.use(cors());
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'ports',
-  password: 'portz',
+  database: 'PortCOP4710',
+  password: 'chabs764',
   port: 5432, // Change if your PostgreSQL server runs on a different port
 });
 console.log("CONNECTED PG");
@@ -150,8 +150,32 @@ app.post('/api/addtruck', async (req, res) => {
 //show error for same ship id registration
 
 //show the first container storage area id that is ready for pick up base on the truck id, and show the first container storage area id that is ready to drop off
-app.get('/api/getTruckAndContanier', async (req, res) => {
+app.post('/api/getTruckAndContainerSource', async (req, res) => {
   try {
+  console.log(req.body)
+      const {trucksID} = req.body;
+
+
+      const query = 'SELECT LocationID FROM container WHERE sourceid = $1 and stats != \'at destination\' ORDER BY sourceid LIMIT 1';
+      const values = [trucksID];
+      const result = await pool.query(query, values);
+      res.status(201).json({ success: true, data: result.rows[0] });
+
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+app.post('/api/getTruckAndContainerDestination', async (req, res) => {
+  try {
+  console.log(req.body)
+      const {trucksID} = req.body;
+
+      const query = 'SELECT LocationID FROM container WHERE destinationid = $1 and stats != \'at destination\' ORDER BY sourceid LIMIT 1';
+      const values = [trucksID]
+      const result = await pool.query(query, values);
+
+      res.status(201).json({ success: true, data: result.rows[0]});
 
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
