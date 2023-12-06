@@ -65,10 +65,10 @@ export default function ContainerRegistration() {
                                                                              placeholder="Enter Storage Location Here"/>
             <br />
             <br />
-                        <label htmlFor="stats">Stats:</label>
+                        <label htmlFor="stats">Status:</label>
                         <input type="text" id="stats" name="stats" value={stats}
                                                                                          onChange={(e) => setstats(e.target.value)}
-                                                                                         placeholder="Enter Stats Here"/>
+                                                                                         placeholder="Enter Status Here"/>
             <br />
             <br />
             <input type="submit" defaultValue="Submit" />
