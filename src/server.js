@@ -12,13 +12,13 @@ app.use(cors());
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'PortCOP4710',
-  password: 'chabs764',
+  database: 'ports',
+  password: 'portz',
   port: 5432, // Change if your PostgreSQL server runs on a different port
 });
 console.log("CONNECTED PG");
 
-// API endpoint to perform the insert operation
+// API endpoint to perform theIdInput insert operation
 app.get('/api/seetable', async (req, res) => {
   try {
     const query = 'SELECT * FROM port';
