@@ -90,6 +90,8 @@ app.post('/api/getberth', async (req, res) => {
   }
 });
 
+
+
 app.post('/api/removeship', async (req, res) => {
   try {
     console.log("calledportexit");
@@ -159,9 +161,25 @@ app.get('/api/getTruckAndContanier', async (req, res) => {
 });
 
 //show a list of containers matching the ID then display it, exclude all containers with status (column stats0 "at destination"
-app.get('/api/getContainersForID', async (req, res) => {
+app.post('/api/getContainersForID', async (req, res) => {
   try {
+    const {IdInput} = req.body;
 
+
+    const query = "SELECT * FROM container WHERE stats = 'at source' and (sourceid = ($1) or destinationid = ($1))"
+    const values = [IdInput];
+
+    const result = await pool.query(query, values);
+
+
+    //console.log(result.rows);
+    if (result.rows.length == 0){
+      res.status(201).json({ success: true, data: "ship or truck has no containers"});
+    }
+    else{
+      res.status(201).json({ success: true, data: result.rows});
+    }
+    
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
@@ -170,7 +188,17 @@ app.get('/api/getContainersForID', async (req, res) => {
 //update the list of containers you got to the next step respectfully, "at source" to "in storage", and "in storage" to "at destination"
 app.post('/api/updateContainers', async (req, res) => {
   try {
+    const {IdInput} = req.body;
 
+
+    const query = "UPDATE container SET stats = 'at destination'  WHERE (sourceid = $1 or destinationid = $1) and stats != 'at destination' and stats = 'at storage')"
+    //const query = "SELECT * FROM container WHERE stats = 'at source' and (sourceid = ($1) or destinationid = ($1))"
+    const values = [IdInput];
+
+    const result = await pool.query(query, values);
+    res.status(201).json({ success: true, data: result.rows});
+
+    //console.log(result.rows);
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
