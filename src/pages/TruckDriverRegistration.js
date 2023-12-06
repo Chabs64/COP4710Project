@@ -8,7 +8,6 @@ export default function TruckDriverRegistration() {
 
       const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
           const responseSource = await fetch('http://localhost:4000/api/getTruckAndContainerSource', {
             method: 'POST',
@@ -16,7 +15,7 @@ export default function TruckDriverRegistration() {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              truckID: TruckID,
+              trucksID: TruckID,
             }),
           });
 
@@ -26,7 +25,7 @@ export default function TruckDriverRegistration() {
           }
 
           const data = await responseSource.json();
-          const dropOff1 = data.data;
+          const dropOff1 = data.data.locationid;
 
 
           setdropOff(dropOff1);
@@ -38,7 +37,7 @@ export default function TruckDriverRegistration() {
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify({
-                truckID: TruckID,
+                trucksID: TruckID,
               }),
             });
 
@@ -49,7 +48,7 @@ export default function TruckDriverRegistration() {
         }
 
         const data2 = await responseDestination.json();
-        const pickUP1 = data2.data;
+        const pickUP1 = data2.data.locationid;
 
 
         setpickUP(pickUP1);
