@@ -139,18 +139,6 @@ app.post('/api/addtruck', async (req, res) => {
   }
 });
 
-
-
-
-
-
-
-
-//needs to be done
-
-//show error for same truck id registration
-//show error for same ship id registration
-
 //show the first container storage area id that is ready for pick up base on the truck id, and show the first container storage area id that is ready to drop off
 app.post('/api/getTruckAndContainerSource', async (req, res) => {
   try {
@@ -190,7 +178,7 @@ app.post('/api/getContainersForID', async (req, res) => {
     const {IdInput} = req.body;
 
 
-    const query = "SELECT * FROM container WHERE stats = 'at source' and (sourceid = ($1) or destinationid = ($1))"
+    const query = "SELECT * FROM container WHERE ((sourceid = ($1) and stats = 'at source') or (destinationid = ($1) and stats = 'at storage'))"
     const values = [IdInput];
 
     const result = await pool.query(query, values);
@@ -209,21 +197,21 @@ app.post('/api/getContainersForID', async (req, res) => {
   }
 });
 
-//update the list of containers you got to the next step respectfully, "at source" to "in storage", and "in storage" to "at destination"
+//update the list of containers you got to the next step respectfully, "at source" to "at storage", and "at storage" to "at destination"
 app.post('/api/updateContainers', async (req, res) => {
   try {
     const {IdInput} = req.body;
     console.log("hit");
 
 
-    const query = "UPDATE container SET stats = 'at destination'  WHERE (stats) IN (SELECT stats FROM container WHERE destinationid = $1 and stats != 'at destination' and stats = 'at storage')"
-    //const query = "SELECT * FROM container WHERE stats = 'at source' and (sourceid = ($1) or destinationid = ($1))"
+    const query = "UPDATE container SET stats = 'at destination'  WHERE (stats) IN (SELECT stats FROM container WHERE destinationid = $1 and stats = 'at storage')"
+
     const values = [IdInput];
     const result = await pool.query(query, values);
 
 
-    const query2 = "UPDATE container SET stats = 'at storage'  WHERE (stats) IN (SELECT stats FROM container WHERE sourceid = $1 and stats != 'at destination' and stats = 'at source')"
-    //const query = "SELECT * FROM container WHERE stats = 'at source' and (sourceid = ($1) or destinationid = ($1))"
+    const query2 = "UPDATE container SET stats = 'at storage'  WHERE (stats) IN (SELECT stats FROM container WHERE sourceid = $1 and stats = 'at source')"
+
     const values2 = [IdInput];
     const result2 = await pool.query(query2, values2);
     res.status(201).json({ success: true, data: result.rows});
