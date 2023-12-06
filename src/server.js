@@ -213,13 +213,19 @@ app.post('/api/getContainersForID', async (req, res) => {
 app.post('/api/updateContainers', async (req, res) => {
   try {
     const {IdInput} = req.body;
+    console.log("hit");
 
 
-    const query = "UPDATE container SET stats = 'at destination'  WHERE (sourceid = $1 or destinationid = $1) and stats != 'at destination' and stats = 'at storage')"
+    const query = "UPDATE container SET stats = 'at destination'  WHERE (stats) IN (SELECT stats FROM container WHERE destinationid = $1 and stats != 'at destination' and stats = 'at storage')"
     //const query = "SELECT * FROM container WHERE stats = 'at source' and (sourceid = ($1) or destinationid = ($1))"
     const values = [IdInput];
-
     const result = await pool.query(query, values);
+
+
+    const query2 = "UPDATE container SET stats = 'at storage'  WHERE (stats) IN (SELECT stats FROM container WHERE sourceid = $1 and stats != 'at destination' and stats = 'at source')"
+    //const query = "SELECT * FROM container WHERE stats = 'at source' and (sourceid = ($1) or destinationid = ($1))"
+    const values2 = [IdInput];
+    const result2 = await pool.query(query2, values2);
     res.status(201).json({ success: true, data: result.rows});
 
     //console.log(result.rows);
